@@ -1,11 +1,21 @@
 import { Specification } from "../../model/Specification";
-import { ICreateSpecificationDTO, ISpecificationRepository } from "../ISpecificationRepository";
+import { ICreateSpecificationDTO, ISpecificationsRepository } from "../ISpecificationsRepository";
 
-class SpecificationRepository implements ISpecificationRepository {
+class SpecificationsRepository implements ISpecificationsRepository {
     private specifications: Specification[];
 
-    constructor() {
+    private static INSTANCE: SpecificationsRepository;
+
+    private constructor() {
         this.specifications = [];
+    }
+
+    public static getInstance(): SpecificationsRepository {
+        if (!SpecificationsRepository.INSTANCE) {
+            SpecificationsRepository.INSTANCE = new SpecificationsRepository();
+        }
+
+        return SpecificationsRepository.INSTANCE;
     }
 
     create({ name, description }: ICreateSpecificationDTO): void {
@@ -21,7 +31,7 @@ class SpecificationRepository implements ISpecificationRepository {
     }
 
     list(): Specification[] {
-        throw new Error("Method not implemented.");
+        return this.specifications;
     }
 
     findByName(name: string): Specification {
@@ -33,4 +43,4 @@ class SpecificationRepository implements ISpecificationRepository {
     }
 }
 
-export { SpecificationRepository };
+export { SpecificationsRepository };
