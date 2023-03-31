@@ -1,4 +1,4 @@
-import { inject, injectable } from "tsyringe/dist/typings/decorators";
+import { inject, injectable } from "tsyringe";
 import { ICategoriesRepository } from "../../repositories/ICategoriesRepository";
 
 interface IRequest {
